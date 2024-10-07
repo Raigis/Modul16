@@ -9,16 +9,35 @@
 */
 
 #include <iostream>
+#include <sstream>
 
 int main()
 {
-    std::string temp;
-    std::cout << "Enter the command:\n";
-    std::cin >> temp;
-    const std::string buffer = temp;
-    std::string a, b;
-    std::string oper;
-    std::stringstream bufferStream(buffer);
-    bufferStream >> a >> oper >> b;
-    std::cout << a << oper << b;
+    std::string buffer;
+    while(true){
+        std::cout << "Enter an arithmetic expression or \"E\"/\"e\" to exit:\n";
+        std::cin >> buffer;
+        if (buffer == "E" || buffer == "e") return 0;
+        double a, b;
+        char oper;
+        std::stringstream bufferStream (buffer);
+        bufferStream >> a >> oper >> b;
+        switch(oper){
+            case '+': 
+                std::cout << "Result: " << a+b;
+                break;
+            case '-': 
+                std::cout << "Result: " << a-b;
+                break;
+            case '*': 
+                std::cout << "Result: " << a*b;
+                break;
+            case '/': 
+                std::cout << "Result: " << a/b;
+                break;
+            default:
+                std::cout << "Incorrect input.";
+        }
+        std::cout << "\n";
+    }
 }
