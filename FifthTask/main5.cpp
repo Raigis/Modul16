@@ -1,7 +1,6 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include <cstdlib>
 #include <sstream>
 
 using namespace std::chrono_literals;
@@ -117,19 +116,21 @@ void count_time (std::string &time) {
 
 int main () {
     std::string time;
-    std::cout << "Enter the start time of tracking:\n";
-    std::cin >> time;
+    std::cout << "Enter the start time of tracking: ";
+    std::getline(std::cin, time);
     int switchesState = 0;
     double tempColor = 5000;
     for (int workTime = 0; workTime <= 2880; workTime++) {
-        std::system("clear");
+        std::cout << "\033[2J";
+        std::cout << "\033[0;0f"; 
         std::cout << time << "\n";
         int hour = std::stoi(time);
         if (workTime % 60 == 0) {
             request(switchesState, hour);
         }
-        if (hour >= 16 && hour <= 20) {
-            tempColor -= 2.584;
+        if (hour >= 16 && hour < 20) {
+            tempColor -= 9.584;
+            if (tempColor < 2700) tempColor = 2700;
         } else if (time == "00:00") {
             tempColor = 5000;
         }

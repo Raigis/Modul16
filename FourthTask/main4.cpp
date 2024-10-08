@@ -13,24 +13,24 @@
 #include <iostream>
 
 enum note {
-    DO = 1, RE = 2, MI = 4, FA = 8, SOL = 16, LA = 32, SI = 64
+   DO = 1, RE = 2, MI = 4, FA = 8, SOL = 16, LA = 32, SI = 64
 };
 
 int main () {
-    std::string chord;
-    std::cout << "Enter the notes of the chord(1 - 7) :\n";
-    std::cin >> chord;
-    int notes = 0;
-    for (char c : chord) {
-        notes |= 1 << ((c - '0') - 1);
-    }
-    if (notes & DO) std::cout << "DO ";
-    if (notes & RE) std::cout << "RE ";
-    if (notes & MI) std::cout << "MI ";
-    if (notes & FA) std::cout << "FA ";    
-    if (notes & SOL) std::cout << "SOL ";
-    if (notes & LA) std::cout << "LA ";
-    if (notes & SI) std::cout << "SI ";
+   std::string chord;
+   std::cout << "Enter the notes of the chord(1 - 7) :\n";
+   std::cin >> chord;
+   int notes = 0;
+   for (char c : chord) {
+      notes |= 1 << ((c - '0') - 1);
+   }
+   if (notes & DO) std::cout << "DO ";
+   if (notes & RE) std::cout << "RE ";
+   if (notes & MI) std::cout << "MI ";
+   if (notes & FA) std::cout << "FA ";    
+   if (notes & SOL) std::cout << "SOL ";
+   if (notes & LA) std::cout << "LA ";
+   if (notes & SI) std::cout << "SI ";
     
-    return 0;
+   return 0;
 }
