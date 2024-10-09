@@ -89,7 +89,7 @@ void request (int &switchesState, int &hour) {
 }
 
 void switches_print (int &switchesState, double &tempColor) {
-    std::cout << "Light inside: ";
+    std::cout << "STATUS:\nLight inside: ";
     if (switchesState & LIGHTS_INSIDE) {
         std::cout << "on\tColor temperature: " << (int)tempColor << "K\n";
     } else {
