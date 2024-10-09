@@ -24,44 +24,60 @@ std::string enter() {
 void temp_in_check(int &tempIn, int &switchesState){
     if (!(switchesState & HEATERS) && tempIn < 22) {
         switchesState |= HEATERS;
+        std::cout << "Heaters ON!\n";
     } else if (switchesState & HEATERS && tempIn > 25) {
         switchesState &= ~HEATERS;
-    } else if (!(switchesState & CONDITIONER) && tempIn >= 30) {
+        std::cout << "Heaters OFF!\n";
+    } 
+    if (!(switchesState & CONDITIONER) && tempIn >= 30) {
         switchesState |= CONDITIONER;
+        std::cout << "Conditioner ON!\n";
     } else if (switchesState & CONDITIONER && tempIn <= 25) {
         switchesState &= ~CONDITIONER;
+        std::cout << "Conditioner OFF!\n";
     }
 }
 
 void temp_out_check(int &tempOut, int &switchesState) {
     if (!(switchesState & WATER_PIPE_HEATING) && tempOut < 0) {
         switchesState |= WATER_PIPE_HEATING;
+        std::cout << "Water pipe heating ON!\n";
     } else if (switchesState & WATER_PIPE_HEATING && tempOut > 5) {
         switchesState &= ~WATER_PIPE_HEATING;
+        std::cout << "Water pipe heating OFF!\n";
     }
 }
 
 void ligths_out_check (std:: string &answerMov, int &switchesState, int &hour) {
     if(!(switchesState & LIGHTS_OUTSIDE) && (hour >= 16 || hour <= 5) && answerMov == "yes") {
         switchesState |= LIGHTS_OUTSIDE;
+        std::cout << "Lights outside ON!\n";
     } else if(switchesState & LIGHTS_OUTSIDE && ((hour < 16 && hour > 5) || answerMov == "no")) {
         switchesState &= ~LIGHTS_OUTSIDE;
+        std::cout << "Lights outside OFF!\n";
     }
 }
 
 void lights_in_check (std::string &answerLight, int &switchesState) {
      if (!(switchesState & LIGHTS_INSIDE) && answerLight == "on") {
         switchesState |= LIGHTS_INSIDE;
+        std::cout << "Lights inside ON!\n";
     } else if (switchesState & LIGHTS_INSIDE && answerLight == "off") {
         switchesState &= ~LIGHTS_INSIDE;
+        std::cout << "Lights inside OFF!\n";
     }
 }
 
 void switches_check(int &tempIn, int &tempOut, std::string &answerMov, std::string &answerLight, int &switchesState, int hour) {
+    std::cout << "\033[2J";
+    std::cout << "\033[0;0f";
     temp_in_check(tempIn, switchesState);
     temp_out_check(tempOut, switchesState);
     ligths_out_check (answerMov, switchesState, hour);
     lights_in_check (answerLight, switchesState);
+    sleep_for(3s);
+    std::cout << "\033[2J";
+    std::cout << "\033[0;0f";
 }
 
 void request (int &switchesState, int &hour) {
